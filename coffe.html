@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoffeeHouse Pro</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    scroll-behavior:smooth;
+}
+
+header{
+    background:#1e3932;
+    color:white;
+    padding:15px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    font-weight:500;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#00c853;
+}
+
+.cart{
+    background:#00754a;
+    padding:8px 18px;
+    border-radius:20px;
+}
+
+section{
+    padding:120px 80px;
+    min-height:100vh;
+}
+
+.hero{
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1509042239860-f550ce710b93');
+    background-size:cover;
+    background-position:center;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+.btn{
+    padding:12px 28px;
+    border:none;
+    border-radius:30px;
+    background:#00754a;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    margin:10px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#004d33;
+}
+
+.menu{
+    text-align:center;
+}
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+    margin-top:40px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    border-radius:12px;
+}
+
+.about{
+    background:#e8f5e9;
+}
+
+.services{
+    text-align:center;
+}
+
+.service-box{
+    margin:20px 0;
+}
+
+.contact{
+    background:#e8f5e9;
+    text-align:center;
+}
+
+input, textarea{
+    width:60%;
+    padding:12px;
+    margin:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+footer{
+    background:#1e3932;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">☕ CoffeeHouse</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="cart">🛒 Cart: <span id="cartCount">0</span></div>
+</header>
+<section class="hero" id="home">
+    <div>
+        <h1>Premium Coffee Experience</h1>
+        <p>Freshly brewed happiness every day.</p>
+        <button class="btn" onclick="scrollToSection('menu')">Explore Menu</button>
+        <button class="btn">Order Online</button>
+    </div>
+</section>
+
+<section class="menu" id="menu">
+    <h2>Our Menu</h2>
+    <div class="product-grid">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348">
+            <h3>Caramel Latte</h3>
+            <p>$5.50</p>
+            <button class="btn" onclick="addToCart()">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096">
+            <h3>Mocha</h3>
+            <p>$6.00</p>
+            <button class="btn" onclick="addToCart()">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1509785307050-d4066910ec1e">
+            <h3>Espresso</h3>
+            <p>$3.00</p>
+            <button class="btn" onclick="addToCart()">Add to Cart</button>
+        </div>
+    </div>
+</section>
+<section class="about" id="about">
+    <h2>About Us</h2>
+    <p>We serve high-quality coffee sourced from the best farms worldwide. 
+    Our mission is to deliver warmth, comfort, and premium taste in every cup.</p>
+</section>
+<section class="services" id="services">
+    <h2>Our Services</h2>
+    <div class="service-box">✔ Dine-In Experience</div>
+    <div class="service-box">✔ Takeaway</div>
+    <div class="service-box">✔ Online Delivery</div>
+    <div class="service-box">✔ Corporate Catering</div>
+</section>
+<section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <input type="text" placeholder="Your Name"><br>
+    <input type="email" placeholder="Your Email"><br>
+    <textarea rows="4" placeholder="Your Message"></textarea><br>
+    <button class="btn">Send Message</button>
+</section>
+
+<footer>
+     2026 CoffeeHouse | All Rights Reserved
+</footer>
+
+<script>
+let cart = 0;
+
+function addToCart(){
+    cart++;
+    document.getElementById("cartCount").innerText = cart;
+}
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+</script>
+
+</body>
+</html>
